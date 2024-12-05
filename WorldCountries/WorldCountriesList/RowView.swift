@@ -8,12 +8,29 @@
 import SwiftUI
 
 struct RowView: View {
-    private let viewModel: RowViewModel
+    let viewModel: WorldCountriesDetailsViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            FlagImage(
+                imageData: viewModel.countryFlagImage,
+                imageSize: CGSize(width: 100, height: 100)
+            )
+            VStack (alignment: .leading) {
+                Text(viewModel.countryName)
+                    .font(.largeTitle)
+                Text(viewModel.countryRegion)
+                    .font(.subheadline)
+            }
+            Spacer()
+        }
     }
 }
 
 #Preview {
-    RowView()
+    RowView(
+        viewModel: WorldCountriesDetailsViewModel(
+            country: Country.getCountry()
+        )
+    )
 }

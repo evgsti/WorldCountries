@@ -5,14 +5,37 @@
 //  Created by Евгений on 05.12.2024.
 //
 
-import SwiftUI
+import Foundation
 
-struct WorldCountriesDetailsViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class WorldCountriesDetailsViewModel: ObservableObject {
+    
+    var countryName: String {
+        //country.name
+        "Страна"
     }
-}
-
-#Preview {
-    WorldCountriesDetailsViewModel()
+    
+    var countryRegion: String {
+        //country.name
+        "Регион"
+    }
+    
+    var countryFlagImage: Data {
+        var imageData = Data()
+        
+//        do {
+//            imageData = try networkManager.fetchImageData(from: counrty.flagImageUrl)
+//        } catch {
+//            print(error)
+//        }
+        
+        return imageData
+    }
+    
+//    private let networkManager = NetworkManager.shared
+//    private let dataManager = DataManager.shared
+    private let country: Country
+    
+    init(country: Country) {
+        self.country = country
+    }
 }
