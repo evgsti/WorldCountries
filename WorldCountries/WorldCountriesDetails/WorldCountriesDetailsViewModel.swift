@@ -6,33 +6,85 @@
 //
 
 import Foundation
+import CoreLocation
 
-class WorldCountriesDetailsViewModel: ObservableObject {
+class WorldCountriesDetailsViewModel: ObservableObject, Identifiable {
+    let id = UUID()
+    let locale = Locale.current.language.languageCode?.identifier ?? "en"
     
-    var countryName: String {
-        //country.name
-        "Страна"
+    var countryFlagUrl: String {
+        country.flags.png
+    }
+    
+    var countryNameCommon: String {
+        switch locale {
+        case "ru":
+            return country.translations["rus"]?.common ?? country.name.common
+        case "es":
+            return country.translations["spa"]?.common ?? country.name.common
+        default:
+            return country.name.common
+        }
+    }
+    
+    var countryNameOfficial: String {
+        switch locale {
+        case "ru":
+            return country.translations["rus"]?.official ?? country.name.official
+        case "es":
+            return country.translations["spa"]?.official ?? country.name.official
+        default:
+            return country.name.official
+        }
+    }
+    
+    var countryCurrencies: String {
+        let currenciesInfo = country.currencies.map { (key, value) in
+            "\(value.name) (\(value.symbol))"
+        }
+        return currenciesInfo.joined(separator: ", ")
+    }
+    
+    var countryCapital: String {
+        country.capital.first ?? "N/A"
     }
     
     var countryRegion: String {
-        //country.name
-        "Регион"
+        country.region
     }
     
-    var countryFlagImage: Data {
-        var imageData = Data()
-        
-//        do {
-//            imageData = try networkManager.fetchImageData(from: counrty.flagImageUrl)
-//        } catch {
-//            print(error)
-//        }
-        
-        return imageData
+    var countryLanguages: String {
+        country.languages.values.joined(separator: ", ")
     }
     
-//    private let networkManager = NetworkManager.shared
-//    private let dataManager = DataManager.shared
+    var countryArea: String {
+        String(format: "%.2f km²", country.area)
+    }
+    
+    var countryPopulation: String {
+        "\(country.population)"
+    }
+    
+    var countryTimezones: String {
+        country.timezones.joined(separator: ", ")
+    }
+    
+    var countryLatitude: Double {
+        guard country.latlng.count >= 2 else { return 0.0 }
+        return country.latlng[0]
+    }
+    
+    var countryLongitude: Double {
+        guard country.latlng.count >= 2 else { return 0.0 }
+        return country.latlng[1]
+    }
+    
+    var coordinates: CLLocationCoordinate2D? {
+        CLLocationCoordinate2D(latitude: countryLatitude, longitude: countryLongitude)
+    }
+    
+    private let networkManager = NetworkManager.shared
+    //    private let dataManager = DataManager.shared
     private let country: Country
     
     init(country: Country) {
