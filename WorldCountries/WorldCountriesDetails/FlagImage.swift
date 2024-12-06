@@ -6,36 +6,46 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct FlagImage: View {
-    let imageData: Data
-    let imageSize: CGSize
+    @Environment(\.colorScheme) private var colorScheme
+
+    let imageUrl: String
+    let size = CGSize(width: 100, height: 100)
     
     var body: some View {
-        getImage(from: imageData)
-            // Делаем изображение масштабируемым
+        KFImage(URL(string: imageUrl))
+            .placeholder {
+                ProgressView()
+                    .controlSize(.extraLarge)
+            }
+            //.setProcessor(DownsamplingImageProcessor(size: size))
+            .fade(duration: 1)
+            .loadDiskFileSynchronously()
+            .scaleFactor(UIScreen.main.scale)
+            .cacheOriginalImage()
+            .memoryCacheExpiration(.never)
+            .diskCacheExpiration(.never)
+            .onSuccess { result in
+                print("Изображение успешно загружено: \(result.source.url?.absoluteString ?? "")")
+            }
+            .onFailure { error in
+                print("Ошибка загрузки: \(error.localizedDescription)")
+            }
             .resizable()
-            // Устанавливаем размеры из переданных параметров
-            .frame(width: imageSize.width, height: imageSize.height)
-    }
-    
-    // Преобразует данные в изображение
-    private func getImage(from data: Data) -> Image {
-        // Пытаемся создать UIImage из данных
-        guard let image = UIImage(data: data) else {
-            // Если не получилось, возвращаем системную иконку флага
-            return Image(systemName: "flag")
-        }
-        // Преобразуем UIImage в SwiftUI Image
-        return Image(uiImage: image)
+            .scaledToFit()
+            .shadow(
+                color: .gray.opacity(colorScheme == .light ? 0.5 : 0),
+                radius: 5,
+                x: 0,
+                y: 2
+            )
     }
 }
 
 #Preview {
     FlagImage(
-        // Создаем пустые данные для превью
-        imageData: Data(),
-        // Задаем размер флага 100x100 пикселей
-        imageSize: CGSize(width: 100, height: 100)
+        imageUrl: "https://flagcdn.com/w320/gs.png"
     )
 }
