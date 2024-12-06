@@ -13,12 +13,12 @@ struct RowView: View {
     var body: some View {
         HStack {
             FlagImage(
-                imageData: viewModel.countryFlagImage,
-                imageSize: CGSize(width: 100, height: 100)
+                imageUrl: viewModel.countryFlagUrl
             )
-            VStack (alignment: .leading) {
-                Text(viewModel.countryName)
-                    .font(.largeTitle)
+            .frame(maxWidth: 100)
+            VStack(alignment: .leading) {
+                Text(viewModel.countryNameCommon)
+                    .font(.title3)
                 Text(viewModel.countryRegion)
                     .font(.subheadline)
             }
