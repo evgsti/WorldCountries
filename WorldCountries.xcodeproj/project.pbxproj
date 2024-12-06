@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BE07AE3F2D02EFC6006F22DE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = BE07AE3E2D02EFC6006F22DE /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		BE07AD8A2D020BF3006F22DE /* WorldCountries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldCountries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE07AE3F2D02EFC6006F22DE /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = WorldCountries;
 			packageProductDependencies = (
+				BE07AE3E2D02EFC6006F22DE /* Kingfisher */,
 			);
 			productName = WorldCountries;
 			productReference = BE07AD8A2D020BF3006F22DE /* WorldCountries.app */;
@@ -76,7 +82,7 @@
 		BE07AD822D020BF3006F22DE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
@@ -86,14 +92,17 @@
 				};
 			};
 			buildConfigurationList = BE07AD852D020BF3006F22DE /* Build configuration list for PBXProject "WorldCountries" */;
-			developmentRegion = en;
+			developmentRegion = ru;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ru,
 			);
 			mainGroup = BE07AD812D020BF3006F22DE;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BE07AE3D2D02EFC6006F22DE /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BE07AD8B2D020BF3006F22DE /* Products */;
 			projectDirPath = "";
@@ -184,12 +193,15 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		BE07AD992D020BF5006F22DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = BE07AD8C2D020BF3006F22DE /* WorldCountries */;
+			baseConfigurationReferenceRelativePath = Resources/Release.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -240,6 +252,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -280,6 +293,8 @@
 		};
 		BE07AD9C2D020BF5006F22DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = BE07AD8C2D020BF3006F22DE /* WorldCountries */;
+			baseConfigurationReferenceRelativePath = Resources/Release.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -334,6 +349,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BE07AE3D2D02EFC6006F22DE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BE07AE3E2D02EFC6006F22DE /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE07AE3D2D02EFC6006F22DE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BE07AD822D020BF3006F22DE /* Project object */;
 }
