@@ -35,7 +35,7 @@ struct RowView: View {
             // Отображение звездочки для избранных стран
             if viewModel.isFavorite {
                 Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
+                    .foregroundColor(Color("tint"))
             }
         }
     }

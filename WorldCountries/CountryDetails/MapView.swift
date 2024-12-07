@@ -44,5 +44,8 @@ struct MapView: View {
 
 /// Предварительный просмотр представления с тестовыми данными
 #Preview {
-    MapView(countryName: "Canada", coordinate: CLLocationCoordinate2D(latitude: 50.7749, longitude: -122.4194))
+    MapView(
+        countryName: "Canada",
+        coordinate: CLLocationCoordinate2D(latitude: 50.7749, longitude: -122.4194)
+    )
 }

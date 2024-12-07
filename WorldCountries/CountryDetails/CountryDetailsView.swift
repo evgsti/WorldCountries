@@ -80,7 +80,7 @@ struct CountryDetailsView: View {
                     viewModel.toggleFavorite(modelContext: modelContext)
                 } label: {
                     Image(systemName: viewModel.isFavorite ? "star.fill" : "star")
-                        .foregroundColor(viewModel.isFavorite ? .yellow : nil)
+                        .foregroundColor(viewModel.isFavorite ? Color("tint") : nil)
                 }
             }
         }

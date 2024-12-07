@@ -25,15 +25,24 @@ struct CountryListView: View {
                 List {
                     // Отображение списка стран с возможностью навигации
                     ForEach(viewModel.filteredCountries) { country in
-                        let countryDetailsViewModel = CountryDetailsViewModel(country: country)
-                        NavigationLink(destination: CountryDetailsView(viewModel: countryDetailsViewModel)) {
+                        let countryDetailsViewModel = CountryDetailsViewModel(
+                            country: country
+                        )
+                        NavigationLink(
+                            destination: CountryDetailsView(
+                                viewModel: countryDetailsViewModel
+                            )
+                        ) {
                             RowView(viewModel: countryDetailsViewModel)
                         }
                         // Добавление действия свайпа для удаления из избранного
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             if viewModel.currentFilter == .favorites {
-                                Button(role: .destructive) {
-                                    viewModel.removeFromFavorites(country, modelContext: modelContext)
+                                Button() {
+                                    viewModel.removeFromFavorites(
+                                        country,
+                                        modelContext: modelContext
+                                    )
                                 } label: {
                                     Image(systemName: "star.slash.fill")
                                 }
@@ -46,14 +55,16 @@ struct CountryListView: View {
                 .searchable(
                     text: $viewModel.searchText  // Привязка текста поиска
                 )
-                .disabled(viewModel.countries.isEmpty)
+                .disabled(viewModel.filteredCountries.isEmpty)
                 // Кнопка для повторной загрузки списка стран
                 .toolbar {
                     if viewModel.loadingFailed {
                         ToolbarItem(placement: .topBarTrailing) {
                             Button {
                                 Task {
-                                    await viewModel.fetchCountries(modelContext: modelContext)
+                                    await viewModel.fetchCountries(
+                                        modelContext: modelContext
+                                    )
                                 }
                             } label: {
                                 Image(systemName: "arrow.clockwise")
@@ -74,7 +85,6 @@ struct CountryListView: View {
                         }
                     }
                 }
-                
                 // Индикатор загрузки
                 if viewModel.isLoading {
                     ProgressView()
