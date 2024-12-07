@@ -48,7 +48,6 @@ struct CountryDetailsView: View {
                     .frame(height: 300)
                     .listRowInsets(EdgeInsets())
                 }
-                
             }
         }
         .navigationBarTitleDisplayMode(.inline)

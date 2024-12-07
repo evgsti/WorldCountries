@@ -51,7 +51,7 @@ class CountryDetailsViewModel: ObservableObject, Identifiable {
     
     // Площадь с форматированием
     var countryArea: String {
-        String(format: "%.2f km²", country.area)
+        String(format: "%.0f km²", country.area)
     }
     
     // Население

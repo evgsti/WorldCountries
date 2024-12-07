@@ -47,6 +47,7 @@ struct CountryListView: View {
                     text: $viewModel.searchText  // Привязка текста поиска
                 )
                 .disabled(viewModel.countries.isEmpty)
+                // Кнопка для повторной загрузки списка стран
                 .toolbar {
                     if viewModel.loadingFailed {
                         ToolbarItem(placement: .topBarTrailing) {
