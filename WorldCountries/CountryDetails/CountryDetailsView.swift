@@ -8,15 +8,14 @@
 import SwiftUI
 import CoreLocation
 
-struct WorldCountriesDetailsView: View {
-    @StateObject var viewModel: WorldCountriesDetailsViewModel
+struct CountryDetailsView: View {
+    @StateObject var viewModel: CountryDetailsViewModel
     
     var body: some View {
         List {
             Section("flag") {
                 FlagImage(imageUrl: viewModel.countryFlagUrl)
                     .listRowInsets(EdgeInsets())
-                    .clipped()
             }
             
             Section("mainInfo") {
@@ -65,5 +64,5 @@ struct InfoRow: View {
 }
 
 #Preview {
-    WorldCountriesDetailsView(viewModel: WorldCountriesDetailsViewModel(country: Country.getCountry()))
+    CountryDetailsView(viewModel: CountryDetailsViewModel(country: CountryItem.getCountry()))
 }

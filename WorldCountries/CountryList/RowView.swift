@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RowView: View {
-    let viewModel: WorldCountriesDetailsViewModel
+    let viewModel: CountryDetailsViewModel
     
     var body: some View {
         HStack {
@@ -29,8 +29,8 @@ struct RowView: View {
 
 #Preview {
     RowView(
-        viewModel: WorldCountriesDetailsViewModel(
-            country: Country.getCountry()
+        viewModel: CountryDetailsViewModel(
+            country: CountryItem.getCountry()
         )
     )
 }

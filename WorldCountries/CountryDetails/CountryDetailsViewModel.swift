@@ -8,12 +8,12 @@
 import Foundation
 import CoreLocation
 
-class WorldCountriesDetailsViewModel: ObservableObject, Identifiable {
+class CountryDetailsViewModel: ObservableObject, Identifiable {
     let id = UUID()
     let locale = Locale.current.language.languageCode?.identifier ?? "en"
     
     var countryFlagUrl: String {
-        country.flags.png
+        country.flags
     }
     
     var countryNameCommon: String {
@@ -23,7 +23,7 @@ class WorldCountriesDetailsViewModel: ObservableObject, Identifiable {
         case "es":
             return country.translations["spa"]?.common ?? country.name.common
         default:
-            return country.name.common
+            return country.name.official
         }
     }
     
@@ -39,14 +39,11 @@ class WorldCountriesDetailsViewModel: ObservableObject, Identifiable {
     }
     
     var countryCurrencies: String {
-        let currenciesInfo = country.currencies.map { (key, value) in
-            "\(value.name) (\(value.symbol))"
-        }
-        return currenciesInfo.joined(separator: ", ")
+        country.currency.name
     }
     
     var countryCapital: String {
-        country.capital.first ?? "N/A"
+        country.capital
     }
     
     var countryRegion: String {
@@ -54,7 +51,7 @@ class WorldCountriesDetailsViewModel: ObservableObject, Identifiable {
     }
     
     var countryLanguages: String {
-        country.languages.values.joined(separator: ", ")
+        country.languages
     }
     
     var countryArea: String {
@@ -66,17 +63,15 @@ class WorldCountriesDetailsViewModel: ObservableObject, Identifiable {
     }
     
     var countryTimezones: String {
-        country.timezones.joined(separator: ", ")
+        country.timezone
     }
     
     var countryLatitude: Double {
-        guard country.latlng.count >= 2 else { return 0.0 }
-        return country.latlng[0]
+        country.latitude
     }
     
     var countryLongitude: Double {
-        guard country.latlng.count >= 2 else { return 0.0 }
-        return country.latlng[1]
+        country.longitude
     }
     
     var coordinates: CLLocationCoordinate2D? {
@@ -84,10 +79,9 @@ class WorldCountriesDetailsViewModel: ObservableObject, Identifiable {
     }
     
     private let networkManager = NetworkManager.shared
-    //    private let dataManager = DataManager.shared
-    private let country: Country
+    private let country: CountryItem
     
-    init(country: Country) {
+    init(country: CountryItem) {
         self.country = country
     }
 }

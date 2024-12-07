@@ -14,7 +14,6 @@ enum NetworkError: Error {
 }
 
 final class NetworkManager {
-    
     static let shared = NetworkManager()
     
     private init() {}
@@ -23,12 +22,11 @@ final class NetworkManager {
         guard let url = URL(string: API) else {
             throw NetworkError.invalidURL
         }
+        
         let (data, _) = try await URLSession.shared.data(from: url)
-        let decoder = JSONDecoder()
-        guard let countries = try? decoder.decode([Country].self, from: data) else {
+        guard let countries = try? JSONDecoder().decode([Country].self, from: data) else {
             throw NetworkError.decodingError
         }
-        print(countries)
         return countries
     }
 }

@@ -7,16 +7,18 @@
 
 import SwiftUI
 
-struct WorldCountriesListView: View {
-    @StateObject private var viewModel = WorldCountriesViewModel()
+struct CountryListView: View {
+    @StateObject var viewModel = CountryViewModel()
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         NavigationStack {
             ZStack {
                 List {
-                    ForEach(viewModel.filteredCountries) { WorldCountriesDetailsViewModel in
-                        NavigationLink(destination: WorldCountriesDetailsView(viewModel: WorldCountriesDetailsViewModel)) {
-                            RowView(viewModel: WorldCountriesDetailsViewModel)
+                    ForEach(viewModel.filteredCountries) { country in
+                        let countryDetailsViewModel = CountryDetailsViewModel(country: country)
+                        NavigationLink(destination: CountryDetailsView(viewModel: countryDetailsViewModel)) {
+                            RowView(viewModel: countryDetailsViewModel)
                         }
                     }
                 }
@@ -34,11 +36,11 @@ struct WorldCountriesListView: View {
             }
         }
         .task {
-            await viewModel.fetchCountries()
+            await viewModel.fetchCountries(modelContext: modelContext)
         }
     }
 }
 
 #Preview {
-    WorldCountriesListView()
+    CountryListView()
 }
