@@ -104,7 +104,7 @@ final class CountryViewModel: ObservableObject {
         do {
             try storageManager.toggleFavorite(country, modelContext: modelContext)
             if let index = countries.firstIndex(where: { $0.id == country.id }) {
-                countries[index].isFavorite.toggle()
+                countries[index].isFavorite = false
             }
         } catch {
             errorAlert = ErrorAlert(
