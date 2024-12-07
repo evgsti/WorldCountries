@@ -108,7 +108,7 @@ class CountryDetailsViewModel: ObservableObject, Identifiable {
         } catch {
             errorAlert = ErrorAlert(
                 title: "error",
-                message: "favoriteUpdateError: \(error.localizedDescription)"
+                message: "favoriteUpdateError"
             )
         }
     }

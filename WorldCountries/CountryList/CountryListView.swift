@@ -74,7 +74,6 @@ struct CountryListView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
-                        if !viewModel.countries.isEmpty && viewModel.hasFavorites {
                             Picker("", selection: $viewModel.currentFilter) {
                                 Text(LocalizedStringKey("allCountries"))
                                     .tag(CountryFilter.all)
@@ -82,7 +81,6 @@ struct CountryListView: View {
                                     .tag(CountryFilter.favorites)
                             }
                             .pickerStyle(.segmented)
-                        }
                     }
                 }
                 // Индикатор загрузки

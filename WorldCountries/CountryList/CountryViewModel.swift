@@ -78,7 +78,7 @@ final class CountryViewModel: ObservableObject {
     // MARK: - Public Methods
     /// Загружает список стран из локального хранилища или сети
     func fetchCountries(modelContext: ModelContext) async {
-        isLoading = true
+        isLoading.toggle()
         do {
             let descriptor = FetchDescriptor<CountryItem>()
             countries = try modelContext.fetch(descriptor)
@@ -95,7 +95,7 @@ final class CountryViewModel: ObservableObject {
             )
             loadingFailed.toggle()
         }
-        isLoading = false
+        isLoading.toggle()
     }
     
     /// Удаляет страну из избранного
@@ -104,12 +104,7 @@ final class CountryViewModel: ObservableObject {
         do {
             try storageManager.toggleFavorite(country, modelContext: modelContext)
             if let index = countries.firstIndex(where: { $0.id == country.id }) {
-                countries[index].isFavorite = false
-                
-                // Если больше нет избранных стран, переключаемся на показ всех
-                if !hasFavorites {
-                    currentFilter = .all
-                }
+                countries[index].isFavorite.toggle()
             }
         } catch {
             errorAlert = ErrorAlert(
