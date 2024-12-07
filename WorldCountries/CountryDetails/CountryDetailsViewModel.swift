@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import SwiftData
 
 class CountryDetailsViewModel: ObservableObject, Identifiable {
     let id = UUID()
@@ -23,7 +24,7 @@ class CountryDetailsViewModel: ObservableObject, Identifiable {
         case "es":
             return country.translations["spa"]?.common ?? country.name.common
         default:
-            return country.name.official
+            return country.name.common
         }
     }
     
@@ -78,10 +79,23 @@ class CountryDetailsViewModel: ObservableObject, Identifiable {
         CLLocationCoordinate2D(latitude: countryLatitude, longitude: countryLongitude)
     }
     
-    private let networkManager = NetworkManager.shared
+    @Published private(set) var isFavorite: Bool
+    
     private let country: CountryItem
+    private let storageManager = StorageManager.shared
     
     init(country: CountryItem) {
         self.country = country
+        self.isFavorite = country.isFavorite
+    }
+    
+    @MainActor
+    func toggleFavorite(modelContext: ModelContext) {
+        do {
+            try storageManager.toggleFavorite(country, modelContext: modelContext)
+            isFavorite = country.isFavorite
+        } catch {
+            print("Ошибка при обновлении избранного: \(error)")
+        }
     }
 }

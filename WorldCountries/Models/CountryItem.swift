@@ -23,6 +23,7 @@ final class CountryItem: Identifiable {
     var area: Double
     var population: Int
     var timezone: String
+    var isFavorite: Bool
     
     init(
         id: UUID,
@@ -37,7 +38,8 @@ final class CountryItem: Identifiable {
         longitude: Double,
         area: Double,
         population: Int,
-        timezone: String
+        timezone: String,
+        isFavorite: Bool
     ) {
         self.id = id
         self.flags = flags
@@ -52,6 +54,7 @@ final class CountryItem: Identifiable {
         self.area = area
         self.population = population
         self.timezone = timezone
+        self.isFavorite = isFavorite
     }
 }
 
@@ -111,7 +114,8 @@ extension CountryItem {
             longitude: 37.6173,
             area: 17098246,
             population: 144104080,
-            timezone: "UTC+3"
+            timezone: "UTC+3",
+            isFavorite: true
         )
     }
 }

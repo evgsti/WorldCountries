@@ -38,7 +38,8 @@ final class StorageManager {
                 longitude: country.latlng[1],
                 area: country.area,
                 population: country.population,
-                timezone: country.timezones.first ?? ""
+                timezone: country.timezones.first ?? "",
+                isFavorite: false
             )
             modelContext.insert(countryItem)
         }
@@ -47,8 +48,9 @@ final class StorageManager {
         try modelContext.save()
     }
     
-    func deleteAllCountries(modelContext: ModelContext) throws {
-        try modelContext.delete(model: CountryItem.self)
+
+    func toggleFavorite(_ country: CountryItem, modelContext: ModelContext) throws {
+        country.isFavorite.toggle()
         try modelContext.save()
     }
 }

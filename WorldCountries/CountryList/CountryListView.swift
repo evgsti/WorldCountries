@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum CountryFilter {
+    case all
+    case favorites
+}
+
 struct CountryListView: View {
     @StateObject var viewModel = CountryViewModel()
     @Environment(\.modelContext) private var modelContext
@@ -20,6 +25,15 @@ struct CountryListView: View {
                         NavigationLink(destination: CountryDetailsView(viewModel: countryDetailsViewModel)) {
                             RowView(viewModel: countryDetailsViewModel)
                         }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            if viewModel.currentFilter == .favorites {
+                                Button(role: .destructive) {
+                                    viewModel.removeFromFavorites(country, modelContext: modelContext)
+                                } label: {
+                                    Image(systemName: "star.slash.fill")
+                                }
+                            }
+                        }
                     }
                 }
                 .navigationTitle("worldCountries")
@@ -32,6 +46,17 @@ struct CountryListView: View {
                     ProgressView()
                         .controlSize(.large)
                         .progressViewStyle(CircularProgressViewStyle())
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    Picker("", selection: $viewModel.currentFilter) {
+                        Text(LocalizedStringKey("allCountries"))
+                            .tag(CountryFilter.all)
+                        Text(LocalizedStringKey("favorites"))
+                            .tag(CountryFilter.favorites)
+                    }
+                    .pickerStyle(.segmented)
                 }
             }
         }

@@ -23,6 +23,10 @@ struct RowView: View {
                     .font(.subheadline)
             }
             Spacer()
+            if viewModel.isFavorite {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
         }
     }
 }

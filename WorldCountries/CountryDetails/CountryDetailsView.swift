@@ -10,6 +10,7 @@ import CoreLocation
 
 struct CountryDetailsView: View {
     @StateObject var viewModel: CountryDetailsViewModel
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         List {
@@ -45,6 +46,16 @@ struct CountryDetailsView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(viewModel.countryNameCommon)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    viewModel.toggleFavorite(modelContext: modelContext)
+                } label: {
+                    Image(systemName: viewModel.isFavorite ? "star.fill" : "star")
+                        .foregroundColor(viewModel.isFavorite ? .yellow : nil)
+                }
+            }
+        }
     }
 }
 

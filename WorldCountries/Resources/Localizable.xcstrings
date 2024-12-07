@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "ru",
   "strings" : {
+    "" : {
+
+    },
     "additionalInfo" : {
       "localizations" : {
         "en" : {
@@ -13,6 +16,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Дополнительная информация"
+          }
+        }
+      }
+    },
+    "allCountries" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все"
           }
         }
       }
@@ -81,6 +100,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Валюты"
+          }
+        }
+      }
+    },
+    "favorites" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Избранное"
           }
         }
       }
