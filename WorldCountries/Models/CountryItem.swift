@@ -22,7 +22,7 @@ final class CountryItem: Identifiable {
     var longitude: Double
     var area: Double
     var population: Int
-    var timezone: String
+    var timezones: String
     var isFavorite: Bool
     
     init(
@@ -53,7 +53,7 @@ final class CountryItem: Identifiable {
         self.longitude = longitude
         self.area = area
         self.population = population
-        self.timezone = timezone
+        self.timezones = timezone
         self.isFavorite = isFavorite
     }
 }

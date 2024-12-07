@@ -46,7 +46,7 @@ final class StorageManager {
                 longitude: country.latlng[1],         // Долгота
                 area: country.area,                   // Площадь
                 population: country.population,        // Население
-                timezone: country.timezones.first ?? "",  // Часовой пояс
+                timezone: country.timezones.joined(separator: ", "),  // Часовой пояс
                 isFavorite: false                     // Флаг избранного
             )
             // Добавляем созданный объект в контекст

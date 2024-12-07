@@ -79,7 +79,6 @@ struct CountryListView: View {
                 if viewModel.isLoading {
                     ProgressView()
                         .controlSize(.large)
-                        .progressViewStyle(CircularProgressViewStyle())
                 }
             }
         }

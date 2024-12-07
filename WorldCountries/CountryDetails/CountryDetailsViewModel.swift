@@ -61,7 +61,7 @@ class CountryDetailsViewModel: ObservableObject, Identifiable {
     
     // Часовые пояса
     var countryTimezones: String {
-        country.timezone
+        country.timezones
     }
     
     // Широта

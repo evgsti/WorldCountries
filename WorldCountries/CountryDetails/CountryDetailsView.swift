@@ -31,15 +31,8 @@ struct CountryDetailsView: View {
                 InfoRow(title: "region", value: viewModel.countryRegion)
             }
             
-            // Секция с дополнительной информацией
-            Section("additionalInfo") {
-                InfoRow(title: "currencies", value: viewModel.countryCurrencies)
-                InfoRow(title: "languages", value: viewModel.countryLanguages)
-                InfoRow(title: "population", value: viewModel.countryPopulation)
-                InfoRow(title: "area", value: viewModel.countryArea)
-                InfoRow(title: "timeZones", value: viewModel.countryTimezones)
-                
-                // Отображение карты, если доступны координаты
+            // Отображение карты, если доступны координаты
+            Section("map") {
                 if let coordinates = viewModel.coordinates {
                     MapView(
                         countryName: viewModel.countryNameCommon,
@@ -48,6 +41,15 @@ struct CountryDetailsView: View {
                     .frame(height: 300)
                     .listRowInsets(EdgeInsets())
                 }
+            }
+            
+            // Секция с дополнительной информацией
+            Section("additionalInfo") {
+                InfoRow(title: "currencies", value: viewModel.countryCurrencies)
+                InfoRow(title: "languages", value: viewModel.countryLanguages)
+                InfoRow(title: "population", value: viewModel.countryPopulation)
+                InfoRow(title: "area", value: viewModel.countryArea)
+                InfoRow(title: "timeZones", value: viewModel.countryTimezones)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
