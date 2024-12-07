@@ -9,4 +9,4 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 // URL API для получения данных о странах
-API_URL = "https://restcountries.com/v3.1/all?fields=name,capital,population,area,currencies,languages,timezones,latlng,flags,region"
+API_URL = "https://restcountries.com/v3.1/all?fields=name,capital,population,area,currencies,languages,timezones,latlng,flags,region,translations"

@@ -104,6 +104,40 @@
         }
       }
     },
+    "error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка"
+          }
+        }
+      }
+    },
+    "favoriteDeleteError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't delete from favorites"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось удалить из избранного"
+          }
+        }
+      }
+    },
     "favorites" : {
       "localizations" : {
         "en" : {
@@ -116,6 +150,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Избранное"
+          }
+        }
+      }
+    },
+    "favoriteUpdateError" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't update favorites"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось обновить избранное"
           }
         }
       }
@@ -169,6 +220,23 @@
         }
       }
     },
+    "noNetwork" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Network"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет интернета"
+          }
+        }
+      }
+    },
     "officialName" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -182,6 +250,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Официальное название"
+          }
+        }
+      }
+    },
+    "ok" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         }
       }

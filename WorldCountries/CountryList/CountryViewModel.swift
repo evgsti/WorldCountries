@@ -10,25 +10,38 @@ import SwiftData
 
 @MainActor
 final class CountryViewModel: ObservableObject {
+    // MARK: - Public Properties
+    /// Текст для поиска стран
     @Published var searchText = ""
+    /// Индикатор загрузки данных
     @Published var isLoading = false
-    @Published private(set) var countries: [CountryItem] = []
+    /// Текущий фильтр для отображения стран
     @Published var currentFilter: CountryFilter = .all
+    /// Алерт для отображения ошибок
+    @Published var errorAlert: ErrorAlert?
+    /// Флаг неудачной загрузки
+    @Published var loadingFailed = false
     
+    /// Возвращает отфильтрованный и отсортированный список стран
     var filteredCountries: [CountryItem] {
+        // Определяем текущую локализацию
         let locale = Locale.current.language.languageCode?.identifier ?? "en"
+        
+        // Выбираем ключ перевода в зависимости от локализации
         let translationKey = switch locale {
             case "ru": "rus"
             case "es": "spa"
             default: "eng"
         }
         
+        // Фильтруем по избранному
         let filtered = if currentFilter == .favorites {
             countries.filter { $0.isFavorite }
         } else {
             countries
         }
         
+        // Применяем поиск и сортировку
         if searchText.isEmpty {
             return filtered.sorted { $0.name.common < $1.name.common }
         } else {
@@ -41,28 +54,46 @@ final class CountryViewModel: ObservableObject {
         }
     }
     
+    // MARK: - Private Properties
+    /// Массив всех стран
+    @Published private(set) var countries: [CountryItem] = []
+    /// Менеджер для сетевых запросов
     private let networkManager = NetworkManager.shared
+    /// Менеджер для работы с хранилищем данных
     private let storageManager = StorageManager.shared
     
+    // MARK: - Public Types
+    /// Структура для представления ошибок в UI
+    struct ErrorAlert: Identifiable {
+        let id = UUID()
+        let title: String
+        let message: String
+    }
+    
+    // MARK: - Public Methods
+    /// Загружает список стран из локального хранилища или сети
     func fetchCountries(modelContext: ModelContext) async {
         isLoading = true
         do {
-            // Сначала пробуем загрузить данные из SwiftData
             let descriptor = FetchDescriptor<CountryItem>()
             countries = try modelContext.fetch(descriptor)
             
-            // Если данных нет, загружаем их из сети
             if countries.isEmpty {
                 let newCountries = try await networkManager.fetchCountries()
                 try storageManager.saveCountries(newCountries, modelContext: modelContext)
                 countries = try modelContext.fetch(descriptor)
             }
         } catch {
-            print("Ошибка при загрузке стран: \(error)")
+            errorAlert = ErrorAlert(
+                title: "error",
+                message: "noNetwork"
+            )
+            loadingFailed.toggle()
         }
         isLoading = false
     }
     
+    /// Удаляет страну из избранного
     @MainActor
     func removeFromFavorites(_ country: CountryItem, modelContext: ModelContext) {
         do {
@@ -71,7 +102,10 @@ final class CountryViewModel: ObservableObject {
                 countries[index].isFavorite = false
             }
         } catch {
-            print("Ошибка при удалении из избранного: \(error)")
+            errorAlert = ErrorAlert(
+                title: "error",
+                message: "favoriteDeleteError"
+            )
         }
     }
 }
