@@ -78,7 +78,7 @@ final class CountryViewModel: ObservableObject {
     // MARK: - Public Methods
     /// Загружает список стран из локального хранилища или сети
     func fetchCountries(modelContext: ModelContext) async {
-        isLoading.toggle()
+        isLoading = true
         do {
             let descriptor = FetchDescriptor<CountryItem>()
             countries = try modelContext.fetch(descriptor)
@@ -93,9 +93,9 @@ final class CountryViewModel: ObservableObject {
                 title: "error",
                 message: "noNetwork"
             )
-            loadingFailed.toggle()
+            loadingFailed = true
         }
-        isLoading.toggle()
+        isLoading = false
     }
     
     /// Удаляет страну из избранного
