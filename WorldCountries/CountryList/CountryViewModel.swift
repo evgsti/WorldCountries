@@ -22,6 +22,11 @@ final class CountryViewModel: ObservableObject {
     /// Флаг неудачной загрузки
     @Published var loadingFailed = false
     
+    /// Проверяет наличие избранных стран
+    var hasFavorites: Bool {
+        countries.contains { $0.isFavorite }
+    }
+    
     /// Возвращает отфильтрованный и отсортированный список стран
     var filteredCountries: [CountryItem] {
         // Определяем текущую локализацию
@@ -100,6 +105,11 @@ final class CountryViewModel: ObservableObject {
             try storageManager.toggleFavorite(country, modelContext: modelContext)
             if let index = countries.firstIndex(where: { $0.id == country.id }) {
                 countries[index].isFavorite = false
+                
+                // Если больше нет избранных стран, переключаемся на показ всех
+                if !hasFavorites {
+                    currentFilter = .all
+                }
             }
         } catch {
             errorAlert = ErrorAlert(

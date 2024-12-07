@@ -55,7 +55,7 @@ struct CountryListView: View {
                 .searchable(
                     text: $viewModel.searchText  // Привязка текста поиска
                 )
-                .disabled(viewModel.filteredCountries.isEmpty)
+                .disabled(viewModel.countries.isEmpty)
                 // Кнопка для повторной загрузки списка стран
                 .toolbar {
                     if viewModel.loadingFailed {
@@ -74,7 +74,7 @@ struct CountryListView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
-                        if !viewModel.countries.isEmpty {
+                        if !viewModel.countries.isEmpty && viewModel.hasFavorites {
                             Picker("", selection: $viewModel.currentFilter) {
                                 Text(LocalizedStringKey("allCountries"))
                                     .tag(CountryFilter.all)
